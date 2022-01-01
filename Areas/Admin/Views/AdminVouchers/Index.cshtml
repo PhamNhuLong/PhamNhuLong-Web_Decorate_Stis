@@ -1,0 +1,85 @@
+﻿@model IEnumerable<doan.Models.Voucher> 
+
+@{
+    ViewData["Title"] = "Danh sách chương trình khuyến mãi";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+
+            <span class="breadcrumb-item active">Danh sách chương trình khuyến mãi</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-md-8">
+            </div>
+
+            <div class="col-lg-4 text-right">
+                <a class="btn btn-primary" asp-controller="AdminVouchers" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm khuyến mãi</span></a>
+
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Tên chương trình</th>
+                        <th>Tỉ lệ giảm giá</th>
+                        <th>Ngày bắt đầu</th>
+                        <th>Ngày kết thúc</th>
+
+
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    @item.MaVoucher
+                                </td>
+                                <td>
+                                    @item.TenVoucher
+                                </td>
+                                <td>@item.TiLeGiamGia</td>
+
+                                <td>@String.Format("{0:dd/MM/yyyy}", item.NgayBatDau)</td>
+                                <td>@String.Format("{0:dd/MM/yyyy}", item.NgayKetThuc)</td>
+
+
+
+
+
+                                <td>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminVouchers" asp-action="Details" asp-route-id="@item.MaVoucher">Chi tiết</a>
+                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminVouchers" asp-action="Edit" asp-route-id="@item.MaVoucher">Sửa</a>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminVouchers" asp-action="Delete" asp-route-id="@item.MaVoucher">Xóa</a>
+
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+
+

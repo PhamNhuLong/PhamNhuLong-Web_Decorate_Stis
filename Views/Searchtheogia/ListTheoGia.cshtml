@@ -1,0 +1,58 @@
+﻿@model List<Sanpham>
+@if (Model != null && Model.Count() > 0)
+
+{
+    var stt = 0;
+
+    foreach (var item in Model)
+
+    {
+        string url = $"/{item.MaSp}.html";
+
+
+        <div class="col-lg-4 col-sm-6">
+            <div class="product-item">
+                <div class="product-img img-zoom-effect">
+                    <a href="@url">
+                        @{
+                            string temp = item.MaSp + ".jpg";
+                        }
+                        <img class="img-full" src="/Image/@temp" alt="@item.MoTa">
+                    </a>
+                    <div class="product-add-action">
+                        <ul>
+                            <li>
+                                @{
+                                    stt += 1;
+                                    var id_add = "add_cart" + @stt.ToString();
+                                }
+                                <form action="/GioHang/Add_cart?product_id=@item.MaSp" method="post" id="@id_add">
+                                    <a href="#" onclick="document.getElementById('@id_add').submit();">
+                                        <i class="pe-7s-cart"></i>
+                                    </a>
+                                </form>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <div class="product-content">
+                    <a class="product-name" asp-action="Details">@item.TenSp</a>
+                    <div class="price-box pb-1">
+                        <span class="new-price">@item.GiaTien.Value.ToString("#,##0") VNĐ</span>
+                    </div>
+                    @*<div class="rating-box">
+                            <ul>
+                                <li><i class="pe-7s-star"></i></li>
+                                <li><i class="pe-7s-star"></i></li>
+                                <li><i class="pe-7s-star"></i></li>
+                                <li><i class="pe-7s-star"></i></li>
+                                <li><i class="pe-7s-star"></i></li>
+                            </ul>
+                        </div>*@
+                </div>
+            </div>
+        </div>
+
+    }
+}

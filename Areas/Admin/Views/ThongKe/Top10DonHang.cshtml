@@ -1,0 +1,78 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Top 10 Đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+}
+@{
+    List<Dondathang> list_ddh = (List<Dondathang>)ViewBag.ListDH; }
+   -
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5>10 đơn đặt hàng lớn nhất</h5>
+
+        </div>
+        <div class="m-t-30">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn đặt hàng</th>
+                            <th>Mã khách hàng</th>
+                            @*<th>MaVoucher</th>*@
+                            <th>Tổng đơn hàng</th>
+                            <th>Số tiền giảm</th>
+                            <th>Thành tiền</th>
+                            <th>Mã nhân viên</th>
+                            <th>Ngày đặt hàng</th>
+                            @*<th>Mã nhà vận chuyển</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (list_ddh != null)
+                        {
+                            foreach (var item in list_ddh)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.MaDdh
+                                    </td>
+                                    <td>
+                                        @item.MaKh
+                                    </td>
+                                    @*<td>
+                                        @item.MaVoucher
+                                    </td>*@
+                                    <td>
+                                        @item.TongDonHang.Value.ToString("#,##0") VNĐ
+                                    </td>
+                                    <td>
+                                        @item.SoTienGiam.Value.ToString("#,##0") VNĐ
+                                    </td>
+                                    <td>
+                                        @item.ThanhTien.Value.ToString("#,##0") VNĐ
+                                    </td>
+                                    <td>
+                                        @item.MaNv
+                                    </td>
+                                    <td>
+                                        @String.Format("{0:dd/MM/yyyy}", item.NgayDatHang)
+                                        @*@item.NgayDatHang*@
+                                    </td>
+                                    @*<td>
+                                        @item.MaNvc
+                                    </td>*@
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

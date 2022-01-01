@@ -1,0 +1,89 @@
+﻿@model doan.Models.Voucher 
+
+@{
+    ViewData["Title"] = "Thông tin khuyến mãi";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="page-header">
+
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminVouchers" asp-action="Index">Danh sách khuyến mãi</a>
+            <span class="breadcrumb-item active">Thông tin khuyến mãi</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin khuyến mãi</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.MaVoucher</td>
+                    </tr>
+                    <tr>
+                        <td>Tên khuyến mãi:</td>
+                        <td>@Model.TenVoucher</td>
+                    </tr>
+                    <tr>
+                        <td>Tỉ lệ giảm giá:</td>
+                        <td>@Model.TiLeGiamGia</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày bắt đầu:</td>
+                        <td>@String.Format("{0:dd/MM/yyyy}", Model.NgayBatDau)</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày kết thúc:</td>
+                        <td>@String.Format("{0:dd/MM/yyyy}", Model.NgayKetThuc)</td>
+                    </tr>
+                    
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*<h1>Details</h1>
+
+    <div>
+        <h4>Voucher</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.TenVoucher)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.TenVoucher)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.TiLeGiamGia)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.TiLeGiamGia)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.NgayBatDau)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.NgayBatDau)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.NgayKetThuc)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.NgayKetThuc)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.MaVoucher">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>*@

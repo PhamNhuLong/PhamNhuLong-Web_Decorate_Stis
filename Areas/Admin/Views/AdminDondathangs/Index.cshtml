@@ -1,0 +1,145 @@
+﻿@using PagedList.Core.Mvc 
+@model PagedList.Core.IPagedList<doan.Models.Dondathang>
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách đơn đặt hàng" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+
+            <span class="breadcrumb-item active">Danh sách đơn đặt hàng : trang @CurrentPage </span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        @*<div class="row m-b-30">
+            <div class="col-lg-12">
+                <div class="d-md-flex">
+                    <div class="m-b-10 m-r-15">
+                        <select class="custom-select" style="min-width: 180px;">
+                            <option selected>Catergory</option>
+                            <option value="all">All</option>
+                            <option value="homeDeco">Home Decoration</option>
+                            <option value="eletronic">Eletronic</option>
+                            <option value="jewellery">Jewellery</option>
+                        </select>
+                    </div>
+                    <div class="m-b-10">
+                        <select class="custom-select" style="min-width: 180px;">
+                            <option selected>Status</option>
+                            <option value="all">All</option>
+                            <option value="inStock">In Stock </option>
+                            <option value="outOfStock">Out of Stock</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+        </div>*@
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Tên khách hàng</th>
+                        <th>Thành tiền</th>
+                        <th>Nhân viên bán</th>
+                        <th>Ngày đặt hàng</th>
+                        @*<th>Đơn vị vận chuyển</th>*@
+                        <th>Trạng thái</th>
+
+
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    @item.MaDdh
+                                </td>
+                                <td>
+                                    @item.MaKhNavigation.TenKh
+                                </td>
+                                <td>@item.ThanhTien.Value.ToString("#,##0") VNĐ</td>
+                                <td>
+                                    @if (@item.MaNvNavigation.TenNv.Length > 13)
+
+                                    {
+                                        var temp = item.MaNvNavigation.TenNv.Substring(0, 13) + "...";
+                                        @temp;
+                                    }
+                                    else
+                                    {
+                                        @item.MaNvNavigation.TenNv;
+                                    }
+
+                                </td>
+
+                                <td>@String.Format("{0:dd/MM/yyyy}", item.NgayDatHang)</td>
+
+                                @*<td>
+
+                                    @if (@item.MaNvcNavigation.TenNvc.Length > 15)
+
+                                    {
+                                        var temp = item.MaNvcNavigation.TenNvc.Substring(0, 15) + "...";
+                                        @temp;
+                                    }
+                                    else
+                                    {
+                                        @item.MaNvcNavigation.TenNvc;
+                                    }
+                                </td>*@
+                            <td>
+                                @if (item.TinhTrangDonHang == 0)
+
+                                {
+                                    <div class=" d-flex align-items-center">
+                                        <div class="badge badge-danger badge-dot m-r-10"></div>
+                                        <div>Đang giao</div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class=" d-flex align-items-center">
+                                        <div class="badge badge-success badge-dot m-r-10"></div>
+                                        <div>Đã giao</div>
+                                    </div>
+                                }
+                            </td>
+
+
+
+                                <td>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminDondathangs" asp-action="Details" asp-route-id="@item.MaDdh">Chi tiết</a>
+                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminDondathangs" asp-action="Edit" asp-route-id="@item.MaDdh">Sửa</a>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminDondathangs" asp-action="Delete" asp-route-id="@item.MaDdh">Xóa</a>
+
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+            <div aria-label="Page navigation example">
+                <ul class="pagination">
+                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminDondathangs" asp-action="Index" />
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

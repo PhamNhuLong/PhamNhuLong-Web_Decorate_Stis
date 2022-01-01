@@ -1,0 +1,101 @@
+﻿@using PagedList.Core.Mvc 
+@model PagedList.Core.IPagedList<doan.Models.Hinhanh>
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách hình ảnh" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+
+            <span class="breadcrumb-item active">Danh sách hình ảnh : trang @CurrentPage </span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-md-8">
+
+
+            </div>
+
+            <div class="col-lg-4 text-right">
+                <a class="btn btn-primary" asp-controller="AdminHinhanhs" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm hình ảnh</span></a>
+
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Link</th>
+                        <th>Tên sản phẩm</th>
+
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    @item.MaHinhAnh
+                                </td>
+                                <td>
+
+                                    @if (item.LinkHinhAnh == null)
+
+                                    {
+                                        var temp = "";
+                                        @temp;
+
+                                    }
+                                    else
+                                   if (item.LinkHinhAnh.Length > 20)
+
+                                    {
+                                        var temp = item.LinkHinhAnh.Substring(0, 20) + "...";
+                                        @temp;
+                                    }
+                                    else
+                                    {
+                                        @item.LinkHinhAnh
+                                    }
+
+                                </td>
+                                <td>@item.MaSpNavigation.TenSp</td>
+
+
+
+
+                                <td>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminHinhanhs" asp-action="Details" asp-route-id="@item.MaHinhAnh">Chi tiết</a>
+                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminHinhanhs" asp-action="Edit" asp-route-id="@item.MaHinhAnh">Sửa</a>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminHinhanhs" asp-action="Delete" asp-route-id="@item.MaHinhAnh">Xóa</a>
+
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+            <div aria-label="Page navigation example">
+                <ul class="pagination">
+                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminHinhanhs" asp-action="Index" />
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>

@@ -1,0 +1,203 @@
+﻿@*@model IEnumerable<doan.Models.Sanpham>*@ 
+@using PagedList.Core.Mvc
+@model PagedList.Core.IPagedList<doan.Models.Sanpham>
+@{
+    int CurrentPage = ViewBag.CurrentPage;
+    ViewData["Title"] = "Danh sách sản phẩm" + CurrentPage;
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <span class="breadcrumb-item active">Danh sách sản phẩm : trang @CurrentPage </span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-affix m-v-10">
+                            <i class="prefix-icon anticon anticon-search opacity-04"></i>
+                            <input id="keyword" name="keyword" type="text" class="form-control" placeholder="Tìm kiếm sản phẩm" />
+                        </div>
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-affix m-v-10">
+                            <select id="madanhmuc" name="madanhmuc" class="custom-select" style="min-width: 200px;" asp-items="ViewBag.Danhmuc">
+                                <option selected>Chọn danh mục sản phẩm</option>
+                                <option value="all">Chọn tất cả</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+            @*<div class="col-lg-8">
+                <div class="d-md-flex">
+                    <div class="m-b-10 m-r-15">
+                        <select id="madanhmuc" name="madanhmuc" class="custom-select" style="min-width: 200px;" asp-items="ViewBag.Danhmuc">
+                            <option selected>Chọn danh mục sản phẩm</option>
+                            <option value="all">Chọn tất cả</option>
+                        </select>
+                        
+                    </div>
+                    <div class="m-b-10">
+                        <select id="mancc" name="mancc" class="custom-select" style="min-width: 200px;" asp-items="ViewBag.Nhacungcap">
+                            <option selected>Chọn nhà cung cấp</option>
+                            <option value="all">Chọn tất cả</option>
+                        </select>
+                    </div>
+                </div>
+            </div>*@
+            <div class="col-lg-4 text-right">
+                <a class="btn btn-primary" asp-controller="AdminSanphams" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm sản phẩm</span></a>
+                @*<button class="btn btn-primary">
+                    <i class="anticon anticon-plus-circle m-r-5"></i>
+                    <span>Add Product</span>
+                </button>*@
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Giá tiền</th>
+                        <th>Số lượng tồn</th>
+                        <th>Danh mục</th>
+                        @*<th>Nhà cung cấp</th>*@
+                        <th>Chức năng</th>
+
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="records_table">
+                    @if (Model != null)
+
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    @item.MaSp
+                                </td>
+                                <td>
+                                    @if (item.TenSp.Length > 41)
+
+                                    {
+                                        var temp = item.TenSp.Substring(0, 41) + "...";
+                                        @temp;
+                                    }
+                                    else
+                                    {
+                                        @item.TenSp;
+                                    }
+                                    @*@item.TenSp*@
+                                </td>
+                                <td>
+                                    @item.GiaTien.Value.ToString("#,##0") VNĐ
+                                </td>
+                                <td>
+                                    @item.SoLuong
+                                </td>
+                                <td>
+                                    @if (item.MaDanhMucNavigation.TenDanhMuc.Length > 20)
+
+                                    {
+                                        var temp = item.MaDanhMucNavigation.TenDanhMuc.Substring(0, 20) + "...";
+                                        @temp;
+                                    }
+                                    else
+                                    {
+                                        @item.MaDanhMucNavigation.TenDanhMuc
+                                    }
+                                    @*@item.MaDanhMucNavigation.TenDanhMuc*@
+                                </td>
+                                @*<td>
+                                    @item.MaNccNavigation.TenNcc
+                                </td>*@
+
+                                <td>
+                                    <a class="btn btn-primary btn-tone btn-sm m-r-5" asp-area="Admin" asp-controller="AdminSanphams" asp-action="Details" asp-route-id="@item.MaSp">Chi tiết</a>
+                                    <a class="btn btn-secondary btn-tone btn-sm m-r-5" asp-area="Admin" asp-controller="AdminSanphams" asp-action="Edit" asp-route-id="@item.MaSp">Sửa</a>
+                                    <a class="btn btn-success btn-tone btn-sm m-r-5" asp-area="Admin" asp-controller="AdminSanphams" asp-action="Delete" asp-route-id="@item.MaSp">Xóa</a>
+
+
+                                </td>
+                            </tr>
+
+                        }
+                    }
+
+                </tbody>
+            </table>
+            <div aria-label="Page navigation example">
+                <ul class="pagination">
+                    <pager class="pager-container" list="@Model" asp-area="Admin" asp-controller="AdminSanphams" asp-route-madanhmuc="@ViewBag.Currentmadanhmuc" asp-action="Index" />
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            jQuery("#madanhmuc").change(function () {
+                var madanhmuc = jQuery(this).children(":selected").attr("value");
+                madanhmuc = parseFloat(madanhmuc);
+                $('#madanhmuc option')
+                    .removeAttr('selected');
+                $('#madanhmuc > [value=' + madanhmuc + ']').attr("selected", "true");
+                $.ajax({
+                    url: '/Admin/AdminSanphams/Filtter',
+                    datatype: "json",
+                    type: "GET",
+                    data: {
+                        MaDanhMuc: madanhmuc
+                    },
+                    async: true,
+                    success: function (results) {
+                        if (results.status == "success") {
+                            window.location.href = results.redirectUrl;
+                        }
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+
+            $("#keyword").keyup(function () {
+                var strkeyword = $('#keyword').val();
+                $.ajax({
+                    url: '/Admin/Search/SearchSanpham/',
+                    datatype: "json",
+                    type: "POST",
+                    data: { keyword: strkeyword },
+                    async: true,
+                    success: function (results) {
+                        $("#records_table").html("");
+                        $("#records_table").html(results);
+
+                    },
+                    error: function (xhr) {
+                        alert('error');
+                    }
+                });
+            });
+        });
+    </script>
+}

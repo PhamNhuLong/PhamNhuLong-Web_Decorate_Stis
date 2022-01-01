@@ -1,0 +1,151 @@
+﻿@using doan.Models;
+
+@{
+    ViewData["Title"] = "Giỏ hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    List<GioHang> list_cart_item = (List<GioHang>)ViewBag.carts;
+
+}
+
+<!-- Begin Main Content Area -->
+<main class="main-content">
+    <div class="breadcrumb-area" style="height:150px">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-item">
+                        <ul>
+                            <li>
+                                <a href="index.html">Trang chủ <i class="pe-7s-angle-right"></i></a>
+                            </li>
+                            <li>Giỏ hàng</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    @if (list_cart_item == null)
+    {
+        <div class="text-center p-100" style="height:50px">Giỏ hàng trống. Cùng mua sắm nào!</div>
+    }
+    else
+    {
+            <div class="cart-area section-space-y-axis-100">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-12">
+                                
+                            @{ 
+                                var tongtien = 0;
+                            }
+                                <div class="table-content table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                @*<th class="product_remove">Chọn</th>*@
+                                                <th class="product_remove">Xóa</th>
+                                                <th class="product-thumbnail">Hình ảnh</th>
+                                                <th class="cart-product-name">Tên sản phẩm</th>
+                                                <th class="product-price">Giá sản phẩm</th>
+                                                <th class="product-quantity">Số lượng</th>
+                                                <th class="product-subtotal">Tổng tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                var stt = 0;
+                                            }
+                                            @foreach (var item in list_cart_item)
+                                            {
+                                            <tr>
+                                                @*<td class="product_remove"></td>*@
+                                                <td class="product_remove">
+                                                    @{
+                                                        stt += 1;
+                                                        var id_del = "delete_cart" + @stt.ToString();
+                                                    }
+                                                    <form action="/GioHang/Delete_cart?product_id=@item.sanpham.MaSp" method="post" id="@id_del">
+                                                        <a href="#" onclick="document.getElementById('@id_del').submit();">
+                                                            <i class="pe-7s-close" title="Remove"></i>
+                                                        </a>
+                                                    </form>
+
+                                                </td>
+                                                <td class="product-thumbnail">
+                                                    <a href="javascript:void(0)">
+                                                        <img src="@item.hinhanh" alt="@item.hinhanh" style="width:100px">
+                                                    </a>
+                                                </td>
+                                                <td class="product-name"><a href="/{@item.sanpham.MaSp}.html">@item.sanpham.TenSp</a></td>
+                                                <td class="product-price"><span class="amount">@item.sanpham.GiaTien.Value.ToString("#,##0") VNĐ</span></td>
+                                                <td class="quantity">
+                                                    @{
+                                                        var sl = @item.Soluong;
+                                                        var id_minus = "minus_cart" + @stt.ToString();
+                                                        var id_plus = "plus_cart" + @stt.ToString();
+                                                    }
+                                                    <div class="row p-5">
+                                                        <div class="col-4 dec qtybutton">
+                                                            <form action="/GioHang/Minus_quantity?product_id=@item.sanpham.MaSp&sl=@sl" method="post" id="@id_minus">
+                                                                <a href="#" onclick="document.getElementById('@id_minus').submit();">
+                                                                    <i class="fa fa-minus"></i>
+                                                                </a>
+                                                            </form>
+                                                        </div>
+                                                        <div class="col-4 cart-plus-minus-box">@sl</div>
+                                                        <div class="col-4 inc qtybutton">
+                                                            <form action="/GioHang/Plus_quantity?product_id=@item.sanpham.MaSp&sl=@sl" method="post" id="@id_plus">
+                                                                <a href="#" onclick="document.getElementById('@id_plus').submit();">
+                                                                    <i class="fa fa-plus"></i>
+                                                                </a>
+                                                            </form>
+                                                        </div>
+                                                       
+                                                        
+                                                    </div>      
+                                                </td>
+                                                @{
+                                                    var sump = @sl * @item.sanpham.GiaTien;
+                                                    tongtien += Convert.ToInt32(sump);
+                                                }
+                                                <td class="product-subtotal"><span class="amount">@sump.Value.ToString("#,##0") VNĐ</span></td>
+                                            </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="coupon-all">
+                                            <div class="coupon">
+                                                <input id="coupon_code" class="input-text" name="coupon_code" value="" placeholder="Mã voucher" type="text">
+                                                <input class="button mt-xxs-30" name="apply_coupon" value="Áp dụng" type="submit">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5 ml-auto">
+                                        <div class="cart-page-total">
+                                            <h2>Thành tiền</h2>
+                                            <ul>
+                                                <li>Tổng tiền: <span>@tongtien.ToString("#,##0") VNĐ</span></li>                                                
+                                            </ul>
+                                            <form action="/DonDatHang/Index_DDH" method="post" id="checkout">
+                                                <a href="#" onclick="document.getElementById('checkout').submit();">Thanh toán</a>
+                                            </form>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            }
+        </main>
+<!-- Main Content Area End Here -->

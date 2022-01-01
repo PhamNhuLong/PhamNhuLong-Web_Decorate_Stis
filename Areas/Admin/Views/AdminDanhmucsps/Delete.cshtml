@@ -1,0 +1,58 @@
+﻿@model doan.Models.Danhmucsp 
+
+@{
+    ViewData["Title"] = "Xác nhận xóa danh mục sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminDanhmucsps" asp-action="Index">Danh sách danh mục sản phẩm</a>
+            <span class="breadcrumb-item active">Xác nhận xóa danh mục sản phẩm</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Xác nhận xóa danh mục sản phẩm</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.MaDanhMuc</td>
+                    </tr>
+                    <tr>
+                        <td>Tên danh mục:</td>
+                        <td>@Model.TenDanhMuc</td>
+                    </tr>
+
+                    <tr>
+                        <td>Mô tả danh mục:</td>
+                        <td>@Model.MoTa</td>
+                    </tr>
+                    <tr>
+                        <td>Xác nhận xóa:</td>
+                        <td>
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="MaDanhMuc" />
+                                <input type="submit" value="Delete" class="btn btn-danger" /> 
+                                
+                            </form>
+                        </td>
+
+                    </tr>
+
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

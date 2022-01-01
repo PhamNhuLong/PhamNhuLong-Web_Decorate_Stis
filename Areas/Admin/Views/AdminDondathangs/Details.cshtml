@@ -1,0 +1,157 @@
+﻿@model doan.Models.Dondathang 
+
+@{
+    ViewData["Title"] = "Thông tin đơn hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<h1>Details</h1>
+
+    <div>
+        <h4>Dondathang</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.TongDonHang)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.TongDonHang)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.SoTienGiam)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.SoTienGiam)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.ThanhTien)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.ThanhTien)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.NgayDatHang)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.NgayDatHang)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.MaKhNavigation)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.MaKhNavigation.DiaChi)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.MaNvNavigation)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.MaNvNavigation.ChucVu)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.MaNvcNavigation)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.MaNvcNavigation.MaNvc)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.MaVoucherNavigation)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.MaVoucherNavigation.TenVoucher)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.MaDdh">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
+
+<div class="page-header">
+
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminDondathangs" asp-action="Index">Danh sách đơn đặt hàng</a>
+            <span class="breadcrumb-item active">Thông tin quyền truy cập</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin đơn đặt hàng</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.MaDdh</td>
+                    </tr>
+                    <tr>
+                        <td>Tên khách hàng:</td>
+                        <td>@Model.MaKhNavigation.TenKh</td>
+                    </tr>
+                    <tr>
+                        <td>Tên Voucher:</td>
+                        <td>@Model.MaVoucherNavigation.TenVoucher</td>
+                    </tr>
+                    <tr>
+                        <td>Tổng đơn hàng:</td>
+                        <td>@Model.TongDonHang.Value.ToString("#,##0") VNĐ</td>
+                    </tr>
+                    <tr>
+                        <td>Số tiền giảm:</td>
+                        <td>@Model.SoTienGiam.Value.ToString("#,##0") VNĐ</td>
+                    </tr>
+                    <tr>
+                        <td>Thành tiền:</td>
+                        <td>@Model.ThanhTien.Value.ToString("#,##0") VNĐ</td>
+                    </tr>
+                    <tr>
+                        <td>Nhân viên thực hiện đơn hàng:</td>
+                        <td>@Model.MaNvNavigation.TenNv</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày đặt hàng:</td>
+                        <td>@String.Format("{0:dd/MM/yyyy}", Model.NgayDatHang)</td>
+                    </tr>
+                    <tr>
+                        <td>Đơn vị vận chuyển:</td>
+                        <td>@Model.MaNvcNavigation.TenNvc</td>
+                    </tr>
+                    <tr>
+                        <td>Tên người nhận:</td>
+                        <td>@Model.TenNguoiNhan</td>
+                    </tr>
+                    <tr>
+                        <td>SDT người nhận:</td>
+                        <td>@Model.SDTNguoiNhan</td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ người nhận:</td>
+                        <td>@Model.DiaChiNhan</td>
+                    </tr>
+                    <tr>
+                        <td>Trạng thái đơn hàng:</td>
+                        @if (@Model.TinhTrangDonHang == 0)
+
+                        {
+                            <td>
+                                Chưa giao
+                            </td>
+                        }
+                        else
+                        {
+
+                            <td>
+                                Đã giao
+                            </td>
+                        }
+                        @*<td>@Model.TinhTrangDonHang</td>*@
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

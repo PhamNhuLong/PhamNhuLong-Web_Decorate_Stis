@@ -1,0 +1,121 @@
+﻿@using doan.Models;
+@{
+    ViewData["Title"] = "Tài khoản của bạn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    Khachhang kh = ViewBag.Khachhang;
+    List<Dondathang> list_donhang = (List<Dondathang>)ViewBag.dondathang;
+
+}
+<main class="main-content">
+    <div class="account-page-area section-space-y-axis-100">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <ul class="nav myaccount-tab-trigger" id="account-page-tab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="account-dashboard-tab" data-bs-toggle="tab" href="#account-dashboard" role="tab" aria-controls="account-dashboard" aria-selected="true">Dashboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="account-orders-tab" data-bs-toggle="tab" href="#account-orders" role="tab" aria-controls="account-orders" aria-selected="false">Đơn hàng của bạn</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="account-address-tab" data-bs-toggle="tab" href="#account-address" role="tab" aria-controls="account-address" aria-selected="false">Tài khoản của bạn</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="account-details-tab" data-bs-toggle="tab" href="#account-details" role="tab" aria-controls="account-details" aria-selected="false">Đổi mật khẩu</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-lg-9">
+                    <div class="tab-content myaccount-tab-content" id="account-page-tab-content">
+                        <div class="tab-pane fade show active" id="account-dashboard" role="tabpanel" aria-labelledby="account-dashboard-tab">
+                            <div class="myaccount-dashboard">
+                                <div>Xin chào <b>@kh.TenKh</b></div>
+                                <div><form action="/Login/Signout" method="get" id="dangxuat">(Nếu đây không phải bạn? <a href="#" onclick="document.getElementById('dangxuat').submit()">Đăng xuất</a>)</form></div>                                
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
+                            <div class="myaccount-orders">
+                                <h4 class="small-title">ĐƠN HÀNG CỦA BẠN</h4>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <tbody>
+                                            <tr>
+                                                <th>MÃ ĐƠN HÀNG</th>
+                                                <th>NGÀY ĐẶT</th>
+                                                <th>THÀNH TIỀN</th>
+                                                <th>TÌNH TRẠNG</th>
+                                                <th></th>
+                                            </tr>
+                                            @foreach (var item in list_donhang)
+                                            { 
+                                        <tr>
+                                            <td>@item.MaDdh</td>
+
+                                            <td>@item.NgayDatHang?.ToString("dd/MM/yyyy")</td>
+                                            @*<td>On Hold</td>*@
+                                            <td>@item.ThanhTien.Value.ToString("#,##0") VNĐ</td>
+                                            @if (item.TinhTrangDonHang == 0)
+                                            {
+                                                <td>Đang giao</td>
+                                            }
+                                            else
+                                            {
+                                                <td>Đã giao</td>
+                                            }
+
+                                            <td>
+                                                <form action="/DonHangKH/Index_DonHangKh?madh=@item.MaDdh" method="post" id="@item.MaDdh">
+                                                    <a href="#" class="btn btn-secondary btn-primary-hover" onclick="document.getElementById('@item.MaDdh').submit()"><span>View</span></a>
+                                                </form>
+                                                
+                                            </td>
+                                        </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-address" role="tabpanel" aria-labelledby="account-address-tab">
+                            <div class="myaccount-address">
+                                <p>Họ tên: @kh.TenKh</p>
+                                <p>Giới tính: @kh.GioiTinh</p>
+                                <p>Số điện thoại: @kh.SoDienThoai</p>
+                                <p>Địa chỉ: @kh.DiaChi</p>                                
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="account-details" role="tabpanel" aria-labelledby="account-details-tab">
+                            <div class="myaccount-details">
+                                <form action="/TaiKhoanKH/DoiPass" class="myaccount-form" method="post">
+                                    <div class="myaccount-form-inner">
+                                        <div class="single-input">
+                                            <label>Mật khẩu hiện tại</label>
+                                            <input type="password" name="pass" required>
+                                        </div>
+                                        <div class="single-input">
+                                            <label>Mật khẩu mới</label>
+                                            <input type="password" id="passwordtk" name="passwordtk" required>
+                                        </div>
+                                        <div class="single-input">
+                                            <label>Xác nhận lại mật khẩu</label>
+                                            <input type="password" id="confirmpasswordtk" name="confirmpasswordtk" required>
+                                        </div>        
+                                        <p id="message"></p>
+                                        <div class="single-input">
+                                            <button id="doimk" class="btn btn-custom-size lg-size btn-secondary btn-primary-hover rounded-0" type="submit">
+                                                <span>ĐỔI MẬT KHẨU</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

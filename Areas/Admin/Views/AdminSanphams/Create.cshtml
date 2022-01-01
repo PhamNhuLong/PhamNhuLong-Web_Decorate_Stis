@@ -1,0 +1,71 @@
+﻿@model doan.Models.Sanpham 
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminSanphams" asp-action="Index">Danh sách sản phẩm</a>
+            <span class="breadcrumb-item active">Thêm mới sản phẩm</span>
+        </nav>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TenSp" class="control-label">Tên sản phẩm</label>
+                <input asp-for="TenSp" class="form-control" />
+                <span asp-validation-for="TenSp" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GiaTien" class="control-label">Giá tiền</label>
+                <input asp-for="GiaTien" class="form-control" />
+                <span asp-validation-for="GiaTien" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoLuong" class="control-label">Số lượng</label>
+                <input asp-for="SoLuong" class="form-control" />
+                <span asp-validation-for="SoLuong" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaDanhMuc" class="control-label">Thuộc danh mục</label>
+                <select asp-for="MaDanhMuc" class="form-control" asp-items="ViewBag.Danhmuc"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MoTa" class="control-label">Mô tả</label>
+                <input asp-for="MoTa" class="form-control" />
+                <span asp-validation-for="MoTa" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaNcc" class="control-label">Nhà cung cấp</label>
+                <select asp-for="MaNcc" class="form-control" asp-items="ViewBag.Nhacungcap"></select>
+            </div>
+            @*<div>
+                Enabled: <asp:CheckBox ID="CheckBox2" runat="server" />    &nbsp;&nbsp;
+                <div id="testFileUploader">
+                    >
+                    <input type="file" id="browserHidden" runat="server" />
+                    <div id="browserVisible"><input type="text" id="fileField" /></div>
+                </div>
+            </div>*@
+                
+            
+            <div class="form-group">
+                <input type="submit" value="Tạo mới" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

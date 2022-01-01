@@ -1,0 +1,361 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var danhthu = ViewData["DanhThu"];
+}
+@{
+    List<Dondathang> list_ddh = (List<Dondathang>)ViewBag.ListDDH;
+    var sList_khachhang = (SortedList<string, int>)ViewBag.sListKH;
+    var slkh = (int)ViewBag.SLKH;
+    var slnv = (int)ViewBag.SLNV;
+    var slsp = (int)ViewBag.SLSP;
+    var sldh = (int)ViewBag.SLDH;
+
+    var slist_sp = (SortedList<string, string>)ViewBag.sListSP;
+
+}
+
+
+<div class="row">
+    <div class="col-lg-5">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0 text-muted">Khách Hàng</p>
+                                <div>
+                                    <div>
+                                        <h2 class="m-b-0">@slkh</h2>
+                                    </div>
+
+                                    <h2 class="icon-holder">
+                                        @*<i class="anticon anticon-hdd"></i>*@
+                                        <i class="anticon anticon-user-add"></i>
+                                    </h2>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0 text-muted">Nhân viên</p>
+                                <div>
+                                    <div>
+                                        <h2 class="m-b-0">@slnv</h2>
+                                    </div>
+
+                                    <h2 class="icon-holder">
+
+                                        @*<i class="anticon anticon-hdd"></i>*@
+                                        <i class="fas fa-male"></i>
+
+                                    </h2>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0 text-muted">Sản phẩm</p>
+                                <div>
+                                    <div>
+                                        <h2 class="m-b-0">@slsp</h2>
+                                    </div>
+
+                                    <h2 class="icon-holder">
+
+                                        @*<i class="anticon anticon-build"></i>*@
+                                        <i class="fab fa-product-hunt"></i>
+
+                                    </h2>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <p class="m-b-0 text-muted">Đơn đặt hàng</p>
+                                <div>
+                                    <div>
+                                        <h2 class="m-b-0">@sldh</h2>
+                                    </div>
+
+                                    <h2 class="icon-holder">
+
+                                        @*<i class="anticon anticon-appstore"></i>*@
+                                        <i class="anticon anticon-form"></i>
+
+                                    </h2>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5>Sản phẩm bán chạy</h5>
+
+                </div>
+                <div class="m-t-30">
+                    <ul class="list-group list-group-flush">
+                        @if (slist_sp != null)
+                        {
+                            foreach (var item in slist_sp)
+                            {
+                                <li class="list-group-item p-h-0">
+                                    <div class="d-flex align-items-center justify-content-between">
+                                        <div class="d-flex">
+                                            @*<div class="avatar avatar-image m-r-15">
+                                                <img src="~/Adminassets/images/others/thumb-9.jpg" alt="">
+                                            </div>*@
+                                            <div>
+                                                <h6 class="m-b-0">
+                                                    <a href="javascript:void(0);" class="text-dark"> @item.Key</a>
+                                                </h6>
+                                                <span class="text-muted font-size-13">@item.Value</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            }
+                        }
+
+
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5>Đơn đặt hàng gần đây</h5>
+            <div>
+                <a href="Admin/AdminDondathangs" class="btn btn-sm btn-default">View All</a>
+            </div>
+        </div>
+        <div class="m-t-30">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn đặt hàng</th>
+                            <th>Mã khách hàng</th>
+                            @*<th>MaVoucher</th>*@
+                            <th>Tổng đơn hàng</th>
+                            <th>Số tiền giảm</th>
+                            <th>Thành tiền</th>
+                            @*<th>Mã nhân viên</th>*@
+                            <th>Ngày đặt hàng</th>
+                            @*<th>Mã nhà vận chuyển</th>*@
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (list_ddh != null)
+                        {
+                            foreach (var item in list_ddh)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.MaDdh
+                                    </td>
+                                    <td>
+                                        @item.MaKh
+                                    </td>
+                                    @*<td>
+                                        @item.MaVoucher
+                                    </td>*@
+                                    <td>
+                                        @item.TongDonHang.Value.ToString("#,##0") VNĐ
+                                    </td>
+                                    <td>
+                                        @item.SoTienGiam.Value.ToString("#,##0") VNĐ
+                                    </td>
+                                    <td>
+                                        @item.ThanhTien.Value.ToString("#,##0") VNĐ
+                                    </td>
+                                    @*<td>
+                                        @item.MaNv
+                                    </td>*@
+                                <td>
+                                    @String.Format("{0:dd/MM/yyyy}", item.NgayDatHang)
+                                    @*@item.NgayDatHang*@
+                                </td>
+                                    @*<td>
+                                        @item.MaNvc
+                                    </td>*@
+                                </tr>
+                            }
+                        }
+                    </tbody>
+
+                    @*<tbody>
+                            <tr>
+                                <td>#5331</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar avatar-image" style="height: 30px; min-width: 30px; max-width:30px">
+                                                <img src="~/Adminassets/images/avatars/thumb-1.jpg" alt="">
+                                            </div>
+                                            <h6 class="m-l-10 m-b-0">Erin Gonzales</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>8 May 2019</td>
+                                <td>$137.00</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge badge-success badge-dot m-r-10"></span>
+                                        <span>Approved</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#5375</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar avatar-image" style="height: 30px; min-width: 30px; max-width:30px">
+                                                <img src="~/Adminassets/images/avatars/thumb-2.jpg" alt="">
+                                            </div>
+                                            <h6 class="m-l-10 m-b-0">Darryl Day</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>6 May 2019</td>
+                                <td>$322.00</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge badge-success badge-dot m-r-10"></span>
+                                        <span>Approved</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#5762</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar avatar-image" style="height: 30px; min-width: 30px; max-width:30px">
+                                                <img src="~/Adminassets/images/avatars/thumb-3.jpg" alt="">
+                                            </div>
+                                            <h6 class="m-l-10 m-b-0">Marshall Nichols</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>1 May 2019</td>
+                                <td>$543.00</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge badge-success badge-dot m-r-10"></span>
+                                        <span>Approved</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#5865</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar avatar-image" style="height: 30px; min-width: 30px; max-width:30px">
+                                                <img src="~/Adminassets/images/avatars/thumb-4.jpg" alt="">
+                                            </div>
+                                            <h6 class="m-l-10 m-b-0">Virgil Gonzales</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>28 April 2019</td>
+                                <td>$876.00</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge badge-primary badge-dot m-r-10"></span>
+                                        <span>Pending</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#5213</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar avatar-image" style="height: 30px; min-width: 30px; max-width:30px">
+                                                <img src="~/Adminassets/images/avatars/thumb-5.jpg" alt="">
+                                            </div>
+                                            <h6 class="m-l-10 m-b-0">Nicole Wyne</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>28 April 2019</td>
+                                <td>$241.00</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge badge-success badge-dot m-r-10"></span>
+                                        <span>Approved</span>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#5211</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar avatar-image" style="height: 30px; min-width: 30px; max-width:30px">
+                                                <img src="~/Adminassets/images/avatars/thumb-6.jpg" alt="">
+                                            </div>
+                                            <h6 class="m-l-10 m-b-0">Riley Newman</h6>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>28 April 2019</td>
+                                <td>$872.00</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <span class="badge badge-danger badge-dot m-r-10"></span>
+                                        <span>Rejected</span>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>*@
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+
+

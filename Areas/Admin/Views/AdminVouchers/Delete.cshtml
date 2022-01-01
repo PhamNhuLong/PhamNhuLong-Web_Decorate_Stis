@@ -1,0 +1,65 @@
+﻿@model doan.Models.Voucher 
+
+@{
+    ViewData["Title"] = "Xác nhận xóa khuyến mãi";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminVouchers" asp-action="Index">Danh sách khuyến mãi</a>
+            <span class="breadcrumb-item active">Xác nhận xóa khuyến mãi</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Xác nhận xóa khuyến mãi</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.MaVoucher</td>
+                    </tr>
+                    <tr>
+                        <td>Tên khuyến mãi:</td>
+                        <td>@Model.TenVoucher</td>
+                    </tr>
+                    <tr>
+                        <td>Tỉ lệ giảm giá:</td>
+                        <td>@Model.TiLeGiamGia</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày bắt đầu:</td>
+                        <td>@String.Format("{0:dd/MM/yyyy}", Model.NgayBatDau)</td>
+                    </tr>
+                    <tr>
+                        <td>Ngày kết thúc:</td>
+                        <td>@String.Format("{0:dd/MM/yyyy}", Model.NgayKetThuc)</td>
+                    </tr>
+
+                    <tr>
+                        <td>Xác nhận xóa:</td>
+                        <td>
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="MaVoucher" />
+                                <input type="submit" value="Delete" class="btn btn-danger" /> 
+                              
+                            </form>
+                        </td>
+
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

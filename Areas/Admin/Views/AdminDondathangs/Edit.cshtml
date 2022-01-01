@@ -1,0 +1,175 @@
+﻿@model doan.Models.Dondathang
+
+@{
+    ViewData["Title"] = "Chỉnh sửa đơn đặt hàng";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="page-header">
+
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminDondathangs" asp-action="Index">Danh sách đơn đặt hàng</a>
+            <span class="breadcrumb-item active">Chỉnh sửa đơn đặt hàng</span>
+        </nav>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit" asp-route-id="@Model.MaDdh" method="POST">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="MaDdh" />
+            <div class="form-group">
+                <label class="control-label">Tên khách hàng</label>
+                <select asp-for="MaKh" class="form-control" asp-items="ViewBag.MaKh"></select>
+                <span asp-validation-for="MaKh" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="MaVoucher" class="control-label">Tên khuyến mãi</label>
+                <select asp-for="MaVoucher" class="form-control" asp-items="ViewBag.MaVoucher"></select>
+                <span asp-validation-for="MaVoucher" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @{ var temp = Model.TongDonHang.Value.ToString("#,##0") + " VNĐ";}
+                <label asp-for="TongDonHang" class="control-label">Tổng đơn hàng</label>
+
+                <input asp-for="TongDonHang" class="form-control" />
+                <span asp-validation-for="TongDonHang" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @{ var tempp = Model.SoTienGiam.Value.ToString("#,##0") + " VNĐ";}
+                <label asp-for="SoTienGiam" class="control-label">Số tiền giảm</label>
+                <input asp-for="SoTienGiam" class="form-control" />
+                <span asp-validation-for="SoTienGiam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @{ var temppp = Model.ThanhTien.Value.ToString("#,##0") + " VNĐ";}
+
+                <label asp-for="ThanhTien" class="control-label">Thành tiền</label>
+                <input asp-for="ThanhTien" class="form-control" />
+                <span asp-validation-for="ThanhTien" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaNv" class="control-label">Nhân viên tạo đơn hàng</label>
+                <select asp-for="MaNv" class="form-control" asp-items="ViewBag.MaNv"></select>
+                <span asp-validation-for="MaNv" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NgayDatHang" class="control-label">Ngày đặt hàng</label>
+                <input asp-for="NgayDatHang" class="form-control" />
+                <span asp-validation-for="NgayDatHang" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaNvc" class="control-label">Đơn vị vận chuyển</label>
+                <select asp-for="MaNvc" class="form-control" asp-items="ViewBag.MaNvc"></select>
+                <span asp-validation-for="MaNvc" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TenNguoiNhan" class="control-label">Tên người nhận</label>
+                <input asp-for="TenNguoiNhan" class="form-control" />
+                <span asp-validation-for="TenNguoiNhan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SDTNguoiNhan" class="control-label">SDT người nhận</label>
+                <input asp-for="SDTNguoiNhan" class="form-control" />
+                <span asp-validation-for="SDTNguoiNhan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiaChiNhan" class="control-label">Địa chỉ nhận</label>
+                <input asp-for="DiaChiNhan" class="form-control" />
+                <span asp-validation-for="DiaChiNhan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TinhTrangDonHang" class="control-label">Tình trạng đơn hàng</label>
+                <input asp-for="TinhTrangDonHang" class="form-control" />
+                <span asp-validation-for="TinhTrangDonHang" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Lưu thay đổi" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
+
+<!--<form asp-action="Edit" asp-route-id="@Model.MaDdh" method="POST">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="MaDdh" />
+    <div class="form-group">
+        <div class="form-group col-md-6">
+            <label class="col-sm-6 col-form-label">Tên khách hàng</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" asp-for="MaKhNavigation.TenKh" placeholder="Tên khách hàng">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-6 col-form-label">Tên khuyến mãi</label>
+            <select asp-for="MaVoucher" class="form-control"  asp-items="ViewBag.MaVoucher" ></select>
+            <span asp-validation-for="MaVoucher" class="text-danger"></span>
+        </div>-->
+@*<div class="form-group col-md-6">
+        <label class="col-sm-3 col-form-label">Tên khuyến mãi</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" asp-for="MaVoucherNavigation.TenVoucher" placeholder="Tên khuyến mãi">
+        </div>
+    </div>*@
+<!--<div class="form-group col-md-6">
+            <label class="col-sm-3 col-form-label">Tổng đơn hàng</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" asp-for="TongDonHang" placeholder="Tổng đơn hàng">
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="col-sm-3 col-form-label">Số tiền giảm</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" asp-for="SoTienGiam" placeholder="Số tiền giảm">
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="col-sm-3 col-form-label">Thành tiền</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" asp-for="ThanhTien" placeholder="Thành tiền">
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="col-sm-3 col-form-label">Tên nhân viên tạo</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" asp-for="MaNvNavigation.TenNv" placeholder="Tên nhân viên">
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="col-sm-3 col-form-label">Ngày đặt hàng</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" asp-for="NgayDatHang" placeholder="Ngày đặt hàng">
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <label class="col-sm-3 col-form-label">Đơn vị vận chuyển</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" asp-for="MaNvcNavigation.TenNvc" placeholder="Đơn vị vận chuyển">
+            </div>
+        </div>
+
+        <div class="form-group col-md-6">
+            <div class="col-sm-6">
+                <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+            </div>
+        </div>
+    </div>
+</form>-->
+@*--------------------------------
+    <h1>Edit</h1>
+
+    <h4>Dondathang</h4>
+    <hr />*@

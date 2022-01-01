@@ -1,0 +1,105 @@
+﻿@model IEnumerable<doan.Models.Taikhoan> 
+
+@{
+    ViewData["Title"] = "Danh sách tài khoản";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            @*<a class="breadcrumb-item" asp-area="Admin" asp-controller="Home" asp-action="Index">Danh sách tài khoản</a>*@
+            <span class="breadcrumb-item active">Danh sách tài khoản</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-lg-8">
+                <div class="d-md-flex">
+                    @*<div class="m-b-10 m-r-15">
+                        <select id="idrole" name="idrole" class="custom-select" style="min-width: 200px;" asp-items="ViewBag.QuyenTruyCap">
+                            <option value="0" disabled selected>Chọn quyền truy cập</option>
+                        </select>
+                    </div>*@
+                    @*<div class="m-b-10">
+                        <select class="custom-select" style="min-width: 180px;">
+                            <option selected>Status</option>
+                            <option value="all">All</option>
+                            <option value="inStock">In Stock </option>
+                            <option value="outOfStock">Out of Stock</option>
+                        </select>
+                    </div>*@
+                </div>
+            </div>
+            
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Số điện thoại</th>
+                        <th>Mật khẩu</th>
+                        <th>Quyền truy cập</th>
+                        <th>Chức năng</th>
+
+
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        foreach (var item in Model)
+
+                        {
+                    <tr>
+
+                        <td>
+                            @item.MaTk
+                        </td>
+                        <td>
+                            <div class="d-flex align-items-center">
+                                <img class="img-fluid rounded" src="assets/images/others/thumb-9.jpg" style="max-width: 60px" alt="">
+                                <h6 class="m-b-0 m-l-10">@item.SoDienThoai</h6>
+                            </div>
+                        </td>
+                        <td>@item.MatKhau</td>
+                        <td>@item.Role.RoleName</td>
+                        <td>
+                            <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTaikhoans" asp-action="Details" asp-route-id="@item.MaTk">Chi tiết</a>
+                            <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTaikhoans" asp-action="Edit" asp-route-id="@item.MaTk">Sửa</a>
+                            <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminTaikhoans" asp-action="Delete" asp-route-id="@item.MaTk">Xóa</a>
+
+
+                        </td>
+                        @*<td>20</td>
+        <td>
+            <div class="d-flex align-items-center">
+                <div class="badge badge-success badge-dot m-r-10"></div>
+                <div>In Stock</div>
+            </div>
+        </td>
+        <td class="text-right">
+            <button class="btn btn-icon btn-hover btn-sm btn-rounded pull-right">
+                <i class="anticon anticon-edit"></i>
+            </button>
+            <button class="btn btn-icon btn-hover btn-sm btn-rounded">
+                <i class="anticon anticon-delete"></i>
+            </button>
+        </td>*@
+                    </tr>
+                        }
+
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

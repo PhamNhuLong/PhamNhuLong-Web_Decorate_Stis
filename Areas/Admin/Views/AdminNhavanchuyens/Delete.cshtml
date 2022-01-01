@@ -1,0 +1,58 @@
+﻿@model doan.Models.Nhavanchuyen 
+
+@{
+    ViewData["Title"] = "Xác nhận xóa đơn vị vận chuyển";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminNhavanchuyens" asp-action="Index">Danh sách đơn vị vận chuyển</a>
+            <span class="breadcrumb-item active">Xác nhận xóa đơn vị vận chuyển</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Xác nhận xóa đơn vị vận chuyển</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.MaNvc</td>
+                    </tr>
+                    <tr>
+                        <td>Tên đơn vị vận chuyển:</td>
+                        <td>@Model.TenNvc</td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ:</td>
+                        <td>@Model.DiaChi</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>@Model.Email</td>
+                    </tr>
+                    <tr>
+                        <td>Xác nhận xóa:</td>
+                        <td>
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="MaNvc" />
+                                <input type="submit" value="Delete" class="btn btn-danger" /> 
+                                
+                            </form>
+                        </td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+

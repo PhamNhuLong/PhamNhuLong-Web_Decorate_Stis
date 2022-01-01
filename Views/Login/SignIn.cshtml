@@ -1,0 +1,72 @@
+﻿@{ 
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;600&family=Comfortaa:wght@300;400;500;600;700&family=Dosis:wght@200;300;400;500;600&family=Source+Sans+Pro:wght@300;400&display=swap"
+          rel="stylesheet" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet"
+          type="text/css"
+          href="~/assets/formatLogin/fonts/iconic/css/material-design-iconic-font.min.css" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="~/assets/formatLogin/css/util.css" />
+    <link rel="stylesheet" type="text/css" href="~/assets/formatLogin/css/css-login.css" />
+    <!-- <link rel="stylesheet" href="../styles/style.css" /> -->
+    <!--===============================================================================================-->
+
+</head>
+<body>
+    <div class="limiter">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form action="/Login/Dangnhap" class="login100-form validate-form" method="post">
+                    <span class="login100-form-title p-b-20"> Welcome to </span>
+                    <span class="login100-form-title p-b-28">
+                        <a asp-controller="Home" asp-action="About"><img class="img-logo" src="~/assets/images/stis_logo.png" alt="logo" /></a>
+                    </span>
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" name="sdt" required />
+                        <span class="focus-input100"
+                              data-placeholder="Số điện thoại"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input"
+                         data-validate="Enter password">
+                        <span class="btn-show-pass">
+                            <i class="zmdi zmdi-eye"></i>
+                        </span>
+                        <input class="input100" type="password" name="pass" required />
+                        <span class="focus-input100" data-placeholder="Password"></span>
+                    </div>
+
+                    <div class="container-login100-form-btn">
+                        <div class="wrap-login100-form-btn">
+                            <div class="login100-form-bgbtn"></div>
+                            <button class="login100-form-btn" type="submit">Đăng nhập</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="text-center p-t-20">                    
+                    <form action="/Login/SignUp" method="get" id="signup1">
+                        <span class="txt1"> Bạn chưa có tài khoản? <a class="txt2" href="#" onclick="document.getElementById('signup1').submit();">Đăng ký</a></span>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--===============================================================================================-->
+    <script src="~/assets/formatLogin/js/jquery-3.2.1.min.js"></script>
+    <script src="~/assets/formatLogin/js/main.js"></script>
+    @await Component.InvokeAsync("Notyf")
+</body>
+</html>

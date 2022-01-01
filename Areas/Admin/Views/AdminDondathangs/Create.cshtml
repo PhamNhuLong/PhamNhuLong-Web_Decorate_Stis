@@ -1,0 +1,65 @@
+﻿@model doan.Models.Dondathang 
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Create</h1>
+
+<h4>Dondathang</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MaKh" class="control-label"></label>
+                <select asp-for="MaKh" class ="form-control" asp-items="ViewBag.MaKh"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaVoucher" class="control-label"></label>
+                <select asp-for="MaVoucher" class ="form-control" asp-items="ViewBag.MaVoucher"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="TongDonHang" class="control-label"></label>
+                <input asp-for="TongDonHang" class="form-control" />
+                <span asp-validation-for="TongDonHang" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoTienGiam" class="control-label"></label>
+                <input asp-for="SoTienGiam" class="form-control" />
+                <span asp-validation-for="SoTienGiam" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThanhTien" class="control-label"></label>
+                <input asp-for="ThanhTien" class="form-control" />
+                <span asp-validation-for="ThanhTien" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaNv" class="control-label"></label>
+                <select asp-for="MaNv" class ="form-control" asp-items="ViewBag.MaNv"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="NgayDatHang" class="control-label"></label>
+                <input asp-for="NgayDatHang" class="form-control" />
+                <span asp-validation-for="NgayDatHang" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MaNvc" class="control-label"></label>
+                <select asp-for="MaNvc" class ="form-control" asp-items="ViewBag.MaNvc"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

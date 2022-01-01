@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "Đơn hàng của bạn";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    List<GioHang> list_item = (List<GioHang>)ViewBag.donDH;
+    int madh = ViewBag.madh;
+    Dondathang ddh = ViewBag.ddh;
+
+}
+<div class="container p-5">
+    <div>
+        <p>Tên người nhận: @ddh.TenNguoiNhan</p>
+        <p>SĐT người nhận: @ddh.SDTNguoiNhan</p>
+        <p>Địa chỉ nhận: @ddh.DiaChiNhan</p>
+    </div>
+    <div class="your-order">
+        <h3>Đơn hàng của bạn: @madh </h3>
+        <div class="your-order-table table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="cart-product-name">Sản phẩm</th>
+                        <th class="cart-product-total">Tổng tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var tongtien = 0;
+                    }
+                    @foreach (var item in list_item)
+                    {
+                        <tr class="cart_item">
+                            <td class="cart-product-name">
+                                @item.sanpham.TenSp <strong class="product-quantity"> × @item.Soluong</strong>
+                            </td>
+                            @{
+                                var sump = @item.Soluong * @item.sanpham.GiaTien;
+                                tongtien += Convert.ToInt32(sump);
+                            }
+                            <td class="cart-product-total"><span class="amount">@sump.Value.ToString("#,##0") VNĐ</span></td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr class="cart-subtotal">
+                        <th>Thành tiền</th>
+                        <td><span class="amount">@tongtien.ToString("#,##0") VNĐ</span></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+</div>

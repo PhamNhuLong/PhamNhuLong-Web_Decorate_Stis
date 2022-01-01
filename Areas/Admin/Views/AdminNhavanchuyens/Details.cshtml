@@ -1,0 +1,76 @@
+﻿@model doan.Models.Nhavanchuyen 
+
+@{
+    ViewData["Title"] = "Thông tin đơn vị vận chuyển";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="page-header">
+
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminNhavanchuyens" asp-action="Index">Danh sách đơn vị vận chuyển</a>
+            <span class="breadcrumb-item active">Thông tin đơn vị vận chuyển</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin đơn vị vận chuyển</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.MaNvc</td>
+                    </tr>
+                    <tr>
+                        <td>Tên đơn vị vận chuyển:</td>
+                        <td>@Model.TenNvc</td>
+                    </tr>
+                    <tr>
+                        <td>Địa chỉ:</td>
+                        <td>@Model.DiaChi</td>
+                    </tr>
+                    <tr>
+                        <td>Email:</td>
+                        <td>@Model.Email</td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@*<h1>Details</h1>
+
+    <div>
+        <h4>Nhavanchuyen</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.TenNvc)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.TenNvc)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.DiaChi)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.DiaChi)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.Email)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.Email)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.MaNvc">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>*@

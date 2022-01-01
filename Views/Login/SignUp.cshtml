@@ -1,0 +1,131 @@
+﻿
+@{
+    Layout = "";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Title Page-->
+    <title>Sign up</title>
+
+    <!-- Icons font CSS-->
+    <link href="vendor/mdi-font/css/material-design-iconic-font.min.css"
+          rel="stylesheet"
+          media="all" />
+    <link href="vendor/font-awesome-4.7/css/font-awesome.min.css"
+          rel="stylesheet"
+          media="all" />
+    <!-- Font special for pages-->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Tamma+2:wght@400;500;600&family=Comfortaa:wght@300;400;500;600;700&family=Dosis:wght@200;300;400;500;600&family=Source+Sans+Pro:wght@300;400&display=swap"
+          rel="stylesheet" />
+
+    <!-- Vendor CSS-->
+    <link href="~/assets/formatSignUp/vendor/select2/select2.min.css" rel="stylesheet" media="all" />
+    <link href="~/assets/formatSignUp/vendor/datepicker/daterangepicker.css"
+          rel="stylesheet"
+          media="all" />
+
+    <!-- Main CSS-->
+    <link href="~/assets/formatSignUp/css/css-signup.css" rel="stylesheet" media="all" />
+</head>
+
+<body>
+    <div class="page-wrapper p-t-15 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w780">
+            <div class="card card-3">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 class="title">ĐĂNG KÝ</h2>
+                    <form action="/Login/Dangky" method="post">
+                        <div class="input-group">
+                            <label for="tenKH">Họ tên</label>
+                            <input class="input--style-3"
+                                   type="text"
+                                   placeholder=""
+                                   name="tenKH" required />
+                        </div>
+                        <div class="input-group">
+                            <label for="sdt">Số điện thoại</label>
+                            <input class="input--style-3"
+                                   type="text"
+                                   placeholder=""
+                                   name="sdt" required />
+                        </div>
+                        <div class="input-group">
+                            <label for="ngay">Ngày sinh</label>
+                            <input class="input--style-3 js-datepicker"
+                                   type="text"
+                                   placeholder=""
+                                   name="ngay" required />
+                            <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                        </div>
+                        <div class="input-group">
+                            <div class="rs-select2 js-select-simple select--no-search">
+                                <label for="gt">Giới tính</label>
+                                <select name="gt">
+                                    <option>Nam</option>
+                                    <option>Nữ</option>
+                                    <option>Khác</option>
+                                </select>
+                                <div class="select-dropdown"></div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="diachi">Địa chỉ</label>
+                            <input class="input--style-3"
+                                   type="text"
+                                   placeholder=""
+                                   name="diachi" required />
+                        </div>
+                        <div class="input-group">
+                            <label for="diachi">Mật khẩu</label>
+                            <input class="input--style-3"
+                                   type="password"
+                                   placeholder=""
+                                   name="pass" id="pass" required />
+                        </div>
+                        <div class="input-group">
+                            <label for="diachi">Xác nhận lại mật khẩu</label>
+                            <input class="input--style-3"
+                                   type="password"
+                                   placeholder=""
+                                   name="confirmpass" id="confirmpass" required />
+                        </div>
+                        <p id="message"></p>
+                        <div class="p-t-10">
+                            <button class="btn btn--pill btn--green" type="submit">
+                                Đăng ký
+                            </button>
+                        </div>
+                    </form>
+                    <div class="text-center p-t-20">
+                        
+                        <form action="/Login/SignIn" method="get" id="signup1">
+                            <span class="txt1"> Bạn đã có tài khoản?  <a class="txt2" href="#" onclick="document.getElementById('signup1').submit();">Đăng nhập</a></span>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="~/assets/formatSignUp/vendor/jquery/jquery.min.js"></script>
+    <!-- Vendor JS-->
+    <script src="~/assets/formatSignUp/vendor/select2/select2.min.js"></script>
+    <script src="~/assets/formatSignUp/vendor/datepicker/moment.min.js"></script>
+    <script src="~/assets/formatSignUp/vendor/datepicker/daterangepicker.js"></script>
+
+    <!-- Main JS-->
+    <script src="~/assets/formatSignUp/js/global.js"></script>
+    <script src="~/assets/formatSignUp/js/main.js"></script>
+
+    @await Component.InvokeAsync("Notyf")
+</body>
+</html>

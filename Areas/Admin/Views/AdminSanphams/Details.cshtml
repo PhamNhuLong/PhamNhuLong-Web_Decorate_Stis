@@ -1,0 +1,109 @@
+﻿@model doan.Models.Sanpham 
+
+@{
+    ViewData["Title"] = "Thông tin sản phẩm";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<h1>Details</h1>
+
+    <div>
+        <h4>Sanpham</h4>
+        <hr />
+        <dl class="row">
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.TenSp)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.TenSp)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.GiaTien)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.GiaTien)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.SoLuong)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.SoLuong)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.MoTa)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.MoTa)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.MaDanhMucNavigation)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.MaDanhMucNavigation.TenDanhMuc)
+            </dd>
+            <dt class = "col-sm-2">
+                @Html.DisplayNameFor(model => model.MaNccNavigation)
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.MaNccNavigation.TenNcc)
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <a asp-action="Edit" asp-route-id="@Model.MaSp">Edit</a> |
+        <a asp-action="Index">Back to List</a>
+    </div>*@
+
+
+<div class="page-header">
+
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+            <a class="breadcrumb-item" asp-area="Admin" asp-controller="AdminSanphams" asp-action="Index">Danh sách sản phẩm</a>
+            <span class="breadcrumb-item active">Thông tin sản phẩm</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Thông tin sản phẩm</h4>
+        <div class="table-responsive">
+            <table class="product-info-table m-t-20">
+                <tbody>
+                    <tr>
+                        <td>ID:</td>
+                        <td class="text-dark font-weight-semibold">@Model.MaSp</td>
+                    </tr>
+                    <tr>
+                        <td>Tên sản phẩm:</td>
+                        <td>@Model.TenSp</td>
+                    </tr>
+                    <tr>
+                        <td>Giá tiền:</td>
+                        <td>@Model.GiaTien.Value.ToString("#,##0") VNĐ</td>
+                    </tr>
+                    <tr>
+                        <td>Số lượng còn:</td>
+                        <td>@Model.SoLuong</td>
+                    </tr>
+                    <tr>
+                        <td>Thuộc danh mục:</td>
+                        <td>@Model.MaDanhMucNavigation.TenDanhMuc</td>
+                    </tr>
+                    <tr>
+                        <td>Mô tả sản phẩm:</td>
+                        <td>@Model.MoTa</td>
+                    </tr>
+                    <tr>
+                        <td>Tên nhà cung cấp:</td>
+                        <td>@Model.MaNccNavigation.TenNcc</td>
+                    </tr>
+                    
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

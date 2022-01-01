@@ -1,0 +1,127 @@
+﻿@using doan.Models;
+
+@{
+    ViewData["Title"] = "Thanh toán";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    List<GioHang> list_cart_item = (List<GioHang>)ViewBag.carts;
+    List<Nhavanchuyen> list_NVC = (List<Nhavanchuyen>)ViewBag.nhavanchuyen;
+
+}
+
+<!-- Begin Main Content Area -->
+<main class="main-content pb-5">
+    <div class="breadcrumb-area m-4">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-item">
+                        <ul>
+                            <li>
+                                <a href="index.html">Trang chủ <i class="pe-7s-angle-right"></i></a>
+                            </li>
+                            <li>Thanh toán</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form action="/DonDatHang/DatHang" method="post">
+        <div class="checkout-area section-space-y-axis-40">
+            <div class="container">
+                <h3 class="my-5 text-border">Thanh toán</h3>
+                <div class="row">
+                    <div class="col-lg-6 col-12">
+                        <form action="javascript:void(0)">
+                            <div class="checkbox-form">
+                                <h3>Chi tiết</h3>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Tên người nhận <span class="required">*</span></label>
+                                            <input type="text" name="ten" placeholder="Tên" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Số điện thoại người nhận <span class="required">*</span></label>
+                                            <input type="text" name="sdt" placeholder="Số điện thoại" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="checkout-form-list">
+                                            <label>Địa chỉ nhận hàng <span class="required">*</span></label>
+                                            <input type="text" name="diachi" placeholder="Địa chỉ" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="country-select clearfix">
+                                            <label>Đơn vị vận chuyển <span class="required">*</span></label>
+                                            <select class="myniceselect nice-select wide" name="nvc">
+                                                @foreach (var item in list_NVC)
+                                                {
+                                                    <option value="@item.MaNvc">@item.TenNvc</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-lg-6 col-12">
+                        <div class="your-order">
+                            <h3>Đơn hàng của bạn</h3>
+                            <div class="your-order-table table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="cart-product-name">Sản phẩm</th>
+                                            <th class="cart-product-total">Tổng tiền</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            var tongtien = 0;
+                                        }
+                                        @foreach (var item in list_cart_item)
+                                        {
+                                            <tr class="cart_item">
+                                                <td class="cart-product-name">
+                                                    @item.sanpham.TenSp <strong class="product-quantity"> × @item.Soluong</strong>
+                                                </td>
+                                                @{
+                                                    var sump = @item.Soluong * @item.sanpham.GiaTien;
+                                                    tongtien += Convert.ToInt32(sump);
+                                                }
+                                                <td class="cart-product-total"><span class="amount">@sump.Value.ToString("#,##0") VNĐ</span></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr class="cart-subtotal">
+                                            <th>Thành tiền</th>
+                                            <td><span class="amount">@tongtien.ToString("#,##0") VNĐ</span></td>
+                                        </tr>
+                                        <!-- <tr class="order-total">
+                                        <th>Order Total</th>
+                                        <td><strong><span class="amount">$215.00</span></strong></td>
+                                    </tr> -->
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="order-button-payment">
+
+                                <input value="Đặt hàng" type="submit">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</main>
+<!-- Main Content Area End Here -->

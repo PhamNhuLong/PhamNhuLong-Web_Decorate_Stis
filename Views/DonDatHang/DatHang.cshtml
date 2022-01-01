@@ -1,0 +1,32 @@
+﻿@using doan.Models;
+
+@{
+    ViewData["Title"] = "Thanh toán";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    var madh = ViewData["MADDH"];
+
+}
+<main class="main-content pb-5">
+    <div class="breadcrumb-area m-4">
+        <div class="container h-100">
+            <div class="row h-100">
+                <div class="col-lg-12">
+                    <div class="breadcrumb-item">
+                        <ul>
+                            <li>
+                                <a href="index.html">Trang chủ <i class="pe-7s-angle-right"></i></a>
+                            </li>
+                            <li>Thanh toán</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h4 class="text-center p-100" style="height:50px">Đặt hàng thành công. Mã đơn hàng của bạn là: @madh</h4>
+        <h4 class="text-center p-100" style="height:50px">Cảm ơn bạn đã mua hàng!</h4>
+    </div>
+</main>

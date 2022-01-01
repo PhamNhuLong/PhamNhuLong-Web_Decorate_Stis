@@ -1,0 +1,58 @@
+﻿@model List<Sanpham>
+@if (Model != null)
+
+{
+    foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @item.MaSp
+            </td>
+            <td>
+                @if (item.TenSp.Length > 41)
+
+                {
+                    var temp = item.TenSp.Substring(0, 41) + "...";
+                    @temp;
+                }
+                else
+                {
+                    @item.TenSp;
+                }
+                @*@item.TenSp*@
+            </td>
+            <td>
+                @item.GiaTien.Value.ToString("#,##0") VNĐ
+            </td>
+            <td>
+                @item.SoLuong
+            </td>
+            <td>
+                @if (item.MaDanhMucNavigation.TenDanhMuc.Length > 20)
+
+                {
+                    var temp = item.MaDanhMucNavigation.TenDanhMuc.Substring(0, 20) + "...";
+                    @temp;
+                }
+                else
+                {
+                    @item.MaDanhMucNavigation.TenDanhMuc
+                }
+                @*@item.MaDanhMucNavigation.TenDanhMuc*@
+            </td>
+            @*<td>
+                @item.MaNccNavigation.TenNcc
+            </td>*@
+
+            <td>
+                <a class="btn btn-primary btn-tone btn-sm m-r-5" asp-area="Admin" asp-controller="AdminSanphams" asp-action="Details" asp-route-id="@item.MaSp">Chi tiết</a>
+                <a class="btn btn-secondary btn-tone btn-sm m-r-5" asp-area="Admin" asp-controller="AdminSanphams" asp-action="Edit" asp-route-id="@item.MaSp">Sửa</a>
+                <a class="btn btn-success btn-tone btn-sm m-r-5" asp-area="Admin" asp-controller="AdminSanphams" asp-action="Delete" asp-route-id="@item.MaSp">Xóa</a>
+
+
+            </td>
+        </tr>
+
+    }
+}

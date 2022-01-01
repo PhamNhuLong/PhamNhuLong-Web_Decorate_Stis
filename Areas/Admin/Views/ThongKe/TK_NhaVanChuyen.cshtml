@@ -1,0 +1,51 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Thống kê nhà vận chuyển";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+}
+@{
+    var list_nvc = (SortedList<string, int>)ViewBag.ListNVC; }
+   -
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5>Thống kê nhà vận chuyển </h5>
+
+        </div>
+        <div class="m-t-30">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Tên nhà vận chuyển</th>
+                            <th>Số lượng</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (list_nvc != null)
+                        {
+                            foreach (var item in list_nvc)
+                            {
+                                <tr>
+                                    <td>
+                                        @item.Key
+                                    </td>
+                                    <td>
+                                        @item.Value
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,52 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Thống kê nhà vận chuyển";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+
+}
+@{
+    var list_dt = (SortedList<string, int>)ViewBag.ListDT; }
+   -
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <h5>Doanh thu theo ngày </h5>
+
+        </div>
+        <div class="m-t-30">
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Ngày</th>
+                            <th>Số lượng</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (list_dt != null)
+                        {
+                            foreach (var item in list_dt)
+                            {
+                                <tr>
+                                    <td>
+                                        @String.Format("{0:dd/MM/yyyy}", item.Key)
+                                        @*@item.Key*@
+                                    </td>
+                                    <td>
+                                        @item.Value.ToString("#,##0") VNĐ
+                                    </td>
+
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,77 @@
+﻿@model IEnumerable<doan.Models.Nhavanchuyen> 
+
+@{
+    ViewData["Title"] = "Danh sánh đơn vị vận chuyển";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="page-header">
+    <div class="header-sub-title">
+        <nav class="breadcrumb breadcrumb-dash">
+            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="breadcrumb-item"><i class="anticon anticon-home m-r-5"></i>Home</a>
+
+            <span class="breadcrumb-item active">Danh sách đơn vị vận chuyển</span>
+        </nav>
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <div class="row m-b-30">
+            <div class="col-md-8">
+            </div>
+
+            <div class="col-lg-4 text-right">
+                <a class="btn btn-primary" asp-controller="AdminNhavanchuyens" asp-action="Create"><i class="anticon anticon-plus-circle m-r-5"></i><span>Thêm đơn vị vận chuyển</span></a>
+
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-hover e-commerce-table">
+                <thead>
+                    <tr>
+
+                        <th>ID</th>
+                        <th>Tên đơn vị vận chuyển</th>
+                        <th>Địa chỉ</th>
+                        <th>Email</th>
+
+                        <th>Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+
+                    {
+                        foreach (var item in Model)
+                        {
+                            <tr>
+
+                                <td>
+                                    @item.MaNvc
+                                </td>
+                                <td>
+                                    @item.TenNvc
+                                </td>
+                                <td>@item.DiaChi</td>
+
+                                <td>@item.Email</td>
+
+
+                                <td>
+                                    <a class="btn btn-primary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminNhavanchuyens" asp-action="Details" asp-route-id="@item.MaNvc">Chi tiết</a>
+                                    <a class="btn btn-secondary btn-tone m-r-5" asp-area="Admin" asp-controller="AdminNhavanchuyens" asp-action="Edit" asp-route-id="@item.MaNvc">Sửa</a>
+                                    <a class="btn btn-success btn-tone m-r-5" asp-area="Admin" asp-controller="AdminNhavanchuyens" asp-action="Delete" asp-route-id="@item.MaNvc">Xóa</a>
+
+
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+

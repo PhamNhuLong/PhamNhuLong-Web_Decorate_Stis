@@ -1,0 +1,51 @@
+﻿@using doan.Models;
+
+@{
+    ViewData["Title"] = "Tìm kiếm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}@**@
+@{
+    List<string> list_HA = (List<string>)ViewBag.HinhAnhSP;
+}
+<div class="container tab-content text-charcoal pt-8 pb-8">
+    <div class="tab-pane fade show active" id="grid-view" role="tabpanel" aria-labelledby="grid-view-tab">
+        <div class="product-grid-view row">
+            @{
+                var stt = 0;
+            }
+            @foreach (var item in (List<Sanpham>)Model)
+            {
+                <div class="col-lg-3 col-sm-6">
+                    <div class="product-item">
+                        <div class="product-img img-zoom-effect">
+                            <a href="single-product.html">
+                                <img class="img-full" src="@list_HA[stt]" alt="Product Images">
+                            </a>
+                            <div class="product-add-action">
+                                <ul>
+                                    <li>
+                                        @{
+                                            stt += 1;
+                                            var id_add = "add_cart" + @stt.ToString();
+                                        }
+                                        <form action="/GioHang/Add_cart?product_id=@item.MaSp" method="post" id="@id_add">
+                                            <a href="#" onclick="document.getElementById('@id_add').submit();">
+                                                <i class="pe-7s-cart"></i>
+                                            </a>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <a class="product-name" href="single-product.html">@item.TenSp</a>
+                            <div class="price-box pb-1">
+                                <span class="new-price text-danger">@item.GiaTien.Value.ToString("#,##0") VNĐ</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
